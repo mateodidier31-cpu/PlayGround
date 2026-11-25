@@ -19,21 +19,21 @@
 
 ## The Ashen Arena
 
-A self-contained, 2D top-down boss-fighting game built with HTML Canvas and vanilla JavaScript. Fight the Cinder Warden, dodge its telegraphed attacks, and earn one of seven persistent ranks.
+A 2D top-down boss-fighting game built with HTML Canvas and vanilla JavaScript. Fight the Cinder Warden, dodge its telegraphed attacks, and earn one of seven persistent ranks. The game supports solo play and server-backed co-op for up to 15 players.
 
 ### Play
 
-Run `./start.sh` in the OMGithub runtime, or serve this folder with any static web server and open `index.html`.
+Run `./start.sh` with Node.js to start the game and co-op server (default port `3000`; set `PORT` to change it), then open the served page. A static web server or opening `index.html` directly still allows solo play, but does not provide online co-op.
 
 - **Move:** WASD or arrow keys
 - **Attack:** Space or click/tap
 - **Dodge:** Shift (or the on-screen Dodge button)
 - **Touch:** Virtual joystick and action buttons on narrow screens
 
-A katana hit deals 20 damage. The boss has 50,000 HP and becomes more aggressive at 75%, 50%, and 25% health. Progression is stored locally in the browser; surviving a victory with at least 1,000 damage earns rank progress.
+A katana hit deals 20 damage. The shared boss starts with 50,000 HP and becomes more aggressive at 75%, 50%, and 25% health. Choose a player name from the menu to join co-op; players share boss health, and the server stores profiles and boss health in `.ashen-profiles.json` and `.ashen-boss.json` beside `server.mjs`. Solo progression is stored in browser `localStorage`. At least 1,000 damage is required to qualify for victory rank progression.
 
 ### Multiplayer and test status
 
-This build is a local single-player version. Online multiplayer (including the requested 15-player co-op) is not connected and requires a server/networking backend.
+The native Node.js server serves the game and handles co-op over WebSockets. The server enforces the 15-player limit, validates boss hits, shares boss/player state, and records deaths and qualified victory awards. Boss health and online profiles persist across server restarts. Remove `.ashen-boss.json` while the server is stopped to restore the boss to its initial health; online profiles are stored separately and remain intact.
 
-Verified in Chromium: the menu loads, a new fight starts, canvas combat reduces boss HP by exactly 20 per hit, and JavaScript syntax passes `node --check`. Browser console showed only a missing optional `/favicon.ico` (404). Full end-to-end testing of defeat, victory, and all rank thresholds remains outstanding.
+Verified with Node.js checks and live local HTTP/WebSocket probes: health endpoint, two-player join and state broadcasts, server-counted death and rejoin with the same profile and boss health, a 20-damage boss hit, the 15-player capacity limit and rejection of an additional player, and a seeded isolated victory award at exactly 1,000 contribution. Full browser playthroughs and visual/audio behavior have not been re-tested in this environment.
