@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#101619">
+  <title>The Ashen Arena — La montaña de los susurros</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" aria-label="The Ashen Arena">
+    <canvas id="world" aria-label="Mundo del juego"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="The Ashen Arena"><span class="brand-mark">灰</span><span><b>THE ASHEN ARENA</b><small>CRÓNICAS DEL REINO CAÍDO</small></span></a>
+      <div class="top-actions"><span class="region-pill"><i></i><span id="regionName">Cumbres de Shirayuki</span></span><button class="icon-btn" id="mapBtn" title="Mapa">⌖</button><button class="icon-btn" id="menuBtn" title="Menú">☰</button></div>
+    </header>
+    <section class="hud-left">
+      <div class="player-card"><div class="portrait">侍</div><div class="player-info"><div class="player-name">KAGE <span id="levelText">NIV. 1</span></div><div class="bar hp"><i id="hpBar"></i><span id="hpText">100 / 100</span></div><div class="bar energy"><i id="energyBar"></i><span id="energyText">60 / 60</span></div></div></div>
+      <div class="xp-row"><span>EXP</span><div class="bar xp"><i id="xpBar"></i></div><span id="xpText">0 / 100</span></div>
+      <div class="currency"><span>◈</span> <b id="goldText">35</b> <small>mon</small><span class="weather-tag" id="weatherText">❄ Nevada</span></div>
+    </section>
+    <aside class="quest-card"><div class="quest-kicker"><span class="quest-dot"></span> MISIÓN ACTIVA</div><strong id="questTitle">Huellas en la nieve</strong><p id="questDescription">Habla con Daichi, el cazador del paso.</p><div class="quest-progress"><span id="questProgress">0 / 1</span><div class="progress-line"><i id="questBar"></i></div></div></aside>
+    <div id="bossHud" class="boss-hud hidden"><div class="boss-title"><span>☠</span><span id="bossName">ONI DE HIELO</span><span>☠</span></div><div class="boss-bar"><i id="bossBar"></i></div></div>
+    <div class="toast" id="toast"></div>
+    <div id="interactHint" class="interact-hint hidden">E <span>Hablar</span></div>
+    <div class="bottom-left"><button class="soft-btn" data-panel="quests">✦ <span>Diario</span></button><button class="soft-btn" data-panel="inventory">▤ <span>Bolsa</span></button><button class="soft-btn" data-panel="map">⌖ <span>Mapa</span></button></div>
+    <div class="controls-hint"><kbd>WASD</kbd> Mover <kbd>J</kbd> Atacar <kbd>K</kbd> Esquivar <kbd>E</kbd> Interactuar</div>
+    <div class="mobile-pad" id="mobilePad"><div class="joystick" id="joystick"><div class="joy-knob" id="joyKnob"></div></div><div class="action-pad"><button class="action attack" data-action="attack"><span>⚔</span><small>Golpe</small></button><button class="action heavy" data-action="heavy"><span>⟡</span><small>Fuerte</small></button><button class="action dodge" data-action="dodge"><span>↗</span><small>Rodar</small></button><button class="action heal" data-action="heal"><span>✚</span><small id="potionCount">Brebaje 2</small></button><button class="action interact" data-action="interact"><span>◉</span><small>Usar</small></button></div></div>
+    <div id="modalRoot"></div>
+    <div id="dialogue" class="dialogue hidden"><div class="dialogue-portrait" id="dialoguePortrait">侍</div><div class="dialogue-content"><div class="dialogue-name" id="dialogueName">DAICHI</div><p id="dialogueText"></p><div id="dialogueChoices" class="dialogue-choices"></div></div><button id="dialogueClose" class="dialogue-close">×</button></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
